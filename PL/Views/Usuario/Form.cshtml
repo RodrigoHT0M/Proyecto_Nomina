@@ -1,0 +1,109 @@
+﻿@model ML.Usuario
+@{
+    ViewData["Title"] = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Formulario</h1>
+
+<div class="container">
+
+    <div class="row">
+
+        @using (Html.BeginForm("Form", "Usuario", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card border-success">
+                        <div class="card-header">Registro de Usuarios</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class=" col-md-6">
+                                    @Html.HiddenFor(model => model.IdUsuario)
+                                    @Html.LabelFor(model => model.Nombre)
+                                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
+
+                                </div>
+
+                                <div class=" col-md-6">
+                                    @Html.LabelFor(model => model.Empleado.IdEmpleado)
+                                    @Html.TextBoxFor(model => model.Empleado.IdEmpleado, new { @class = "form-control" })
+
+                                </div>
+                                
+
+
+
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    @Html.LabelFor(model => model.PasswordHash)
+                                    @Html.TextBoxFor(model => model.PasswordHash, new { @class = "form-control" })
+
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="mt-2">
+                                        @Html.LabelFor(model => model.Status)
+                                        <div class="form-check">
+                                            @Html.RadioButtonFor(model => model.Status, "true", new { @class = "form-check-input", id = "rdbRol" }) Activo
+                                        </div>
+                                        <div class="form-check">
+                                            @Html.RadioButtonFor(model => model.Status, "false", new { @class = "form-check-input", id = "rdbRol" }) Inactivo
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                               
+
+
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+
+                                    @Html.LabelFor(model => model.Rol.IdRol, "Rol")
+                                    @Html.DropDownListFor(model => model.Rol.IdRol, new SelectList(Model.Rol.Roles, "IdRol", "Descripcion"), "Selecciona tu Rol en la empresa", new { @class = "form-select" })
+
+                                </div>
+
+                            </div>
+                            
+
+                            @if (Model.IdUsuario > 0)
+                            {
+                                <div class="col-md-6 mt-2">
+                                    <button type="submit" class="btn btn-primary mx-2">ACTUALIZAR</button>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-6 mt-2">
+                                    <button type="submit" class="btn btn-success mx-2">GUARDAR</button>
+                                </div>
+                            }
+
+
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+
+            </div>
+        }
+
+    </div>
+</div>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+

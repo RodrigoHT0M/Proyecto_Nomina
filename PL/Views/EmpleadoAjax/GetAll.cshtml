@@ -1,0 +1,278 @@
+﻿@model ML.Empleado
+@{
+    ViewData["Title"] = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>GetAll</h1>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+
+            <button type="button" class="btn btn-outline-success" onclick="OpenModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
+                    <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                    <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4" />
+                </svg>
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="row mt-3">
+
+        <div class="table-responsive">
+            <table class="table table-success table-striped mt-3" id="TableEmpleados">
+                <thead class="table-light">
+                    <tr>
+                        <td>Imagen</td>
+
+                        <td>Nombre</td>
+                        <td>ApellidoPaterno</td>
+                        <td>ApellidoMaterno</td>
+                        <td>FechaNacimiento</td>
+                        <td>RFC</td>
+                        <td>NSS</td>
+                        <td>CURP</td>
+                        <td>Correo</td>
+                        <td>FechaIngreso</td>
+                        <td>SalarioBase</td>
+                        <td>NoFaltas</td>
+                        <td>Departamento</td>
+                        <td>Editar</td>
+                        <td>Eliminar</td>
+
+                    </tr>
+
+
+                </thead>
+
+                <tbody></tbody>
+
+
+
+
+            </table>
+        </div>
+
+
+
+
+
+    </div>
+
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Eliminar Empleado</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Estas seguro que deseas eliminar al Empleado: <span id="Empleado"></span>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <a id="btnEliminarEmpleado" href="" class="btn btn-danger">Eliminar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Formulario de Usuarios</h5>
+                <button type="button" onclick="CloseModal()" aria-label="Close">
+                    <i class="bi bi-x-circle"></i>
+                </button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="container">
+
+                    <div class="row">
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card border-success">
+                                    <div class="card-header">Registro de Empleados</div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class=" col-md-4">
+                                                @Html.HiddenFor(model => model.IdEmpleado)
+                                                @Html.HiddenFor(model => model.Imagen)
+                                                @Html.LabelFor(model => model.Nombre)
+                                                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", id = "TxtNombre" })
+
+                                            </div>
+
+                                            <div class=" col-md-4">
+                                                @Html.LabelFor(model => model.ApellidoPaterno)
+                                                @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", id = "TxtApellidoPaterno" })
+
+                                            </div>
+                                            <div class=" col-md-4">
+                                                @Html.LabelFor(model => model.ApellidoMaterno)
+                                                @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", id = "TxtApellidoMaterno" })
+
+                                            </div>
+                                            
+
+
+
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col-md-4">
+                                                @Html.LabelFor(model => model.RFC)
+                                                @Html.TextBoxFor(model => model.RFC, new { @class = "form-control", id = "TxtRFC" })
+
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                @Html.LabelFor(model => model.NSS)
+                                                @Html.TextBoxFor(model => model.NSS, new { @class = "form-control", id = "TxtNSS" })
+
+                                            </div>
+                                            <div class="col-md-4">
+                                                @Html.LabelFor(model => model.CURP)
+                                                @Html.TextBoxFor(model => model.CURP, new { @class = "form-control", id = "TxtCURP" })
+
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                @Html.LabelFor(model => model.FechaNacimiento)
+                                                @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control", id = "TxtFechaNacimiento" })
+
+
+                                            </div>
+                                            <div class="col-md-4">
+                                                @Html.LabelFor(model => model.FechaIngreso)
+                                                @Html.TextBoxFor(model => model.FechaIngreso, new { @class = "form-control", id = "TxtFechaIngreso" })
+
+
+                                            </div>
+                                            <div class="col-md-4">
+
+                                                @Html.LabelFor(model => model.Departamento.IdDepartamento, "Departamento")
+                                                @Html.DropDownListFor(model => model.Departamento.IdDepartamento, new SelectList(string.Empty, "IdDepartamento", "Descripcion"), "Selecciona tu Departamento", new { @class = "form-select", @id = "ddlDepartamento" })
+
+                                              @*   @Html.LabelFor(model => model.Departamento.IdDepartamento)
+                                                @Html.TextBoxFor(model => model.Departamento.IdDepartamento, new { @class = "form-control", id = "TxtIdDepartamento" }) *@
+
+
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                @Html.LabelFor(model => model.SalarioBase)
+                                                @Html.TextBoxFor(model => model.SalarioBase, new { @class = "form-control", id = "TxtSalarioBase" })
+
+
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                @Html.LabelFor(model => model.NoFaltas)
+                                                @Html.TextBoxFor(model => model.NoFaltas, new { @class = "form-control", id = "TxtNoFaltas" })
+                                            </div>
+                                            <div class=" col-md-4">
+                                                @Html.LabelFor(model => model.Correo)
+                                                @Html.TextBoxFor(model => model.Correo, new { @class = "form-control", id = "TxtCorreo" })
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-4">
+                                                    
+
+                                                        @* <img src="data:image/png;base64,@Convert.ToBase64String(usuarioImagen.Imagen)" width="100" height="100" /> *@
+                                                        <input type="file" multiple name="imgEmpleadoInput" id="imgEmpleadoInput" class="form-control mt-2" onchange="CargarImagen(event)" />
+
+
+                                                    
+                                                    <div class="col-md-6 mb-4 text-center ">
+
+                                                       
+                                                        <img id="imgUsuarioModal" src="" width="150px" height="150px" />
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" id="BtnAdd" onclick="Add()" class="btn btn-outline-success">
+                    ADD
+
+
+                </button>
+                <button type="button" id="BtnUpdate" onclick="Update()" class="btn btn-outline-warning">
+                    UPDATE
+
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery/dist/jquery-ui.js"></script>
+<script src="~/js/EmpleadoBack.js"></script>
+
+<script>
+        DatePicker();
+           function DatePicker() {
+
+        $("#TxtFechaNacimiento, #TxtFechaIngreso").datepicker({
+             dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '1930:2025'
+
+        });
+    }
+</script>
+
+
+
+
+
+
+
+
+
+

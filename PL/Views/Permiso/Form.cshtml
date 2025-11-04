@@ -1,0 +1,159 @@
+﻿@model ML.Permiso
+@{
+    ViewData["Title"] = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Registro de Permisos</h1>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+<div class="container-fluid">
+
+
+    <div class="row">
+
+        @using (Html.BeginForm("Form", "Permiso", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card border-success">
+                        <div class="card-header">Registro de Empleados</div>
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center align-items-center">
+
+                                <div class=" col-md-4 text-center" , id="TxtFechaInicio">
+                                    @Html.HiddenFor(model => model.IdPermiso)
+                                    @Html.LabelFor(model => model.FechaInicio, new { @class = "text-center" })
+                                    @Html.HiddenFor(model => model.FechaInicio, new { @class = "form-control", id = "TxtFechaInicioValue" })
+                                </div>
+                                <div class=" col-md-4 text-center" , id="TxtFechaFin">
+
+                                    @Html.LabelFor(model => model.FechaFin, new { @class = "text-center" })
+                                    @Html.HiddenFor(model => model.FechaFin, new { @class = "form-control", id = "TxtFechaFinValue" })
+                                </div>
+
+                            </div>
+                            <div class="row d-flex justify-content-center align-items-center mt-2">
+
+
+
+                                <div class="col-md-4 text-center">
+                                    @Html.LabelFor(model => model.HoraInicio)
+                                    @Html.TextBoxFor(model => model.HoraInicio, new { @type = "time", @class = "form-control", id = "TxtHoraInicio" })
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    @Html.LabelFor(model => model.HoraFin)
+                                    @Html.TextBoxFor(model => model.HoraFin, new { @type = "time", @class = "form-control", id = "TxtHoraFin" })
+                                </div>
+
+                                <div class="col-md-4 text-center">
+                                    @Html.LabelFor(model => model.Motivo)
+                                    @Html.TextAreaFor(model => model.Motivo, new { @class = "form-control", id = "TxtMotivo", rows = "4", placeholder = "Escribe el motivo aquí..." })
+                                </div>
+
+
+
+
+
+
+
+
+                            </div>
+
+
+
+
+
+                            <div class="col-md-6 mt-2">
+                                <button type="submit" class="btn btn-success mx-2">SOLICITAR</button>
+                            </div>
+
+
+
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+
+            </div>
+        }
+
+    </div>
+</div>
+
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery/dist/jquery-ui.js"></script>
+
+
+<script>
+
+    
+
+    DatePicker();
+           function DatePicker() {
+
+         $("#TxtFechaInicio").datepicker({
+            inline: true,
+            dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '1930:2025',
+            onSelect: function (dateText) {
+                $("#TxtFechaInicioValue").val(dateText); // actualiza solo FechaInicio
+            }
+        });
+     $("#TxtFechaFin").datepicker({
+            inline: true,
+            dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '1930:2025',
+            onSelect: function (dateText) {
+                $("#TxtFechaFinValue").val(dateText); // actualiza solo FechaFin
+            }
+        });
+
+    }
+    // function DatePicker() {
+    //     // Calendario de FechaInicio
+    //     $("#TxtFechaInicio").datepicker({
+    //         inline: true,
+    //         dateFormat: 'dd-mm-yy',
+    //         changeMonth: true,
+    //         changeYear: true,
+    //         yearRange: '1930:2025',
+    //         onSelect: function (dateText) {
+    //             $("#TxtFechaInicioValue").val(dateText); // actualiza solo FechaInicio
+    //         }
+    //     });
+
+    //     // Calendario de FechaFin
+    //     $("#TxtFechaFin").datepicker({
+    //         inline: true,
+    //         dateFormat: 'dd-mm-yy',
+    //         changeMonth: true,
+    //         changeYear: true,
+    //         yearRange: '1930:2025',
+    //         onSelect: function (dateText) {
+    //             $("#TxtFechaFinValue").val(dateText); // actualiza solo FechaFin
+    //         }
+    //     });
+    // }
+
+    // $(document).ready(function () {
+    //     DatePicker();
+    // });
+
+
+
+
+</script>

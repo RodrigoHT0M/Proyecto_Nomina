@@ -1,0 +1,184 @@
+﻿@model ML.Usuario
+@{
+    ViewData["Title"] = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>GetAll</h1>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+
+            <button type="button" class="btn btn-outline-success" onclick="OpenModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
+                    <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                    <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4" />
+                </svg>
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="row mt-3">
+
+        <div class="table-responsive">
+            <table class="table table-success table-striped mt-3" id="TableUsuarios">
+                <thead class="table-light">
+                    <tr>
+
+
+                        <td>Nombre</td>
+                        <td>ApellidoPaterno</td>
+                        <td>Departamento</td>
+                        <td>NombreUsuario</td>
+                        <td>Password</td>
+                        <td>Status</td>
+                        <td>Rol</td>
+                        <td>Editar</td>
+                        <td>Eliminar</td>
+
+                    </tr>
+
+
+                </thead>
+
+
+                <tbody>
+                </tbody>
+
+
+
+            </table>
+        </div>
+
+
+
+
+
+    </div>
+
+</div>
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Formulario de Usuarios</h5>
+                <button type="button" onclick="CloseModal()" aria-label="Close">
+                    <i class="bi bi-x-circle"></i>
+                </button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card border-success">
+                            <div class="card-header">Registro de Usuarios</div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class=" col-md-6">
+                                        @Html.HiddenFor(model => model.IdUsuario)
+                                        @Html.LabelFor(model => model.Nombre)
+                                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", id = "TxtUserName" })
+
+                                    </div>
+
+                                    <div class=" col-md-6">
+                                     @*    @Html.LabelFor(model => model.Empleado.IdEmpleado)
+                                        @Html.TextBoxFor(model => model.Empleado.IdEmpleado, new { @class = "form-control", id = "TxtIdEmpleado" }) *@
+
+                                        <div class="col-md-6">
+
+                                            @Html.LabelFor(model => model.Empleado.IdEmpleado)
+                                            @Html.DropDownListFor(model => model.Empleado.IdEmpleado, new SelectList(string.Empty, "IdEmpleado", "CURP"), "Selecciona el Empleado que eres", new { @class = "form-select", @id = "TxtIdEmpleado" })
+
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(model => model.PasswordHash)
+                                        @Html.TextBoxFor(model => model.PasswordHash, new { @class = "form-control", id = "TxtPasswordHash" })
+
+                                    </div>
+
+
+                                    <div class="col-md-4">
+                                        @Html.LabelFor(model => model.Status)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="true" id="rdbRol1" name="Rol">
+                                            <label class="form-check-label" for="rdbRol1">
+                                                Activo
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="false" id="rdbRol2" name="Rol">
+                                            <label class="form-check-label" for="rdbRol1">
+                                                Inactivo
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+
+
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+
+                                        @Html.LabelFor(model => model.Rol.IdRol)
+                                        @Html.DropDownListFor(model => model.Rol.IdRol, new SelectList(string.Empty, "IdRol", "Descripcion"), "Selecciona tu Rol", new { @class = "form-select", @id = "ddlRol" })
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" id="BtnAdd" onclick="Add()" class="btn btn-outline-success">
+                    ADD
+
+
+                </button>
+                <button type="button" id="BtnUpdate" onclick="Update()" class="btn btn-outline-warning">
+                    UPDATE
+
+                </button>
+            </div>
+
+        </div>
+       
+    </div>
+</div>
+</div>
+</div>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/UsuarioBack.js"></script>
+

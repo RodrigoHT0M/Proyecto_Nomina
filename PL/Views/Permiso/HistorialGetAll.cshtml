@@ -1,0 +1,93 @@
+﻿@model ML.HistorialPermiso
+@{
+    ViewData["Title"] = "HistorialGetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<h1>HistorialDePermisos</h1>
+
+<div class="container">
+    <div class="row">
+
+
+        @if (Model.HistorialPermisos.Count > 0)
+        {
+
+            <div class="table-responsive">
+                <table id="TablePermisos" class="table table-bordered">
+
+
+
+                    <thead class="table-dark">
+                        <tr class="text-center">
+                            <th rowspan="2">Autorizador</th>
+                            <th>Correo</th>
+                            <th>Departamento</th>
+                            <th>Fecha de Revision</th>
+                            <th>Inicio del Permiso</th>
+                            <th>Fin del Permiso</th>
+                            <th>Status</th>
+
+
+                        </tr>
+
+                    </thead>
+                    @foreach (ML.HistorialPermiso obj in Model.HistorialPermisos)
+                    {
+                        <tbody>
+
+
+                            <tr id="@obj.IdHistorialPermiso" class="text-center">
+
+
+                                <td rowspan="2">@obj.Autorizo.Nombre  @obj.Autorizo.ApellidoPaterno</td>
+                                <td>@obj.Autorizo.Correo</td>
+                                <td>@obj.Autorizo.Departamento.Descripcion</td>
+                                <td>@obj.FechaRevision</td>
+                                <td>@obj.Permiso.FechaInicio</td>
+                                <td>@obj.Permiso.FechaFin</td>
+                                @if(obj.StatusPermiso.Descripcion == "Aprobado")
+                                {
+                                    <td>
+                                        <button type="button" class="btn btn-outline-success">
+                                        <i class="bi bi-check-circle"></i>
+                                        </button>
+                                    </td>
+
+                                }
+                                else
+                                {
+                                    <td>
+                                        <button type="button" class="btn btn-outline-danger">
+                                            <i class="bi bi-x-circle"></i>
+                                        </button>
+                                    </td>
+                                }
+                                
+
+
+                                
+
+                            </tr>
+
+                        </tbody>
+                    }
+
+
+                </table>
+            </div>
+
+        }
+        else
+        {
+            <div class="row mt-2 alert-danger">
+                No hay permisos pendientes
+
+            </div>
+        }
+
+
+    </div>
+
+</div>
+

@@ -1,0 +1,201 @@
+﻿@model ML.Empleado
+@{
+    ViewData["Title"] = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Formulario</h1>
+@* <link rel="stylesheet" href="~/css/jquery-ui.css" />
+ *@ <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<div class="container">
+
+    <div class="row">
+
+        @using (Html.BeginForm("Form", "Empleado", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card border-success">
+                        <div class="card-header">Registro de Empleados</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class=" col-md-3">
+                                    @Html.HiddenFor(model => model.IdEmpleado)
+                                    @Html.HiddenFor(model => model.Imagen)
+                                    @Html.LabelFor(model => model.Nombre)
+                                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
+
+                                </div>
+
+                                <div class=" col-md-3">
+                                    @Html.LabelFor(model => model.ApellidoPaterno)
+                                    @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control" })
+
+                                </div>
+                                <div class=" col-md-3">
+                                    @Html.LabelFor(model => model.ApellidoMaterno)
+                                    @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control" })
+
+                                </div>
+                                <div class=" col-md-3">
+                                    @Html.LabelFor(model => model.Correo)
+                                    @Html.TextBoxFor(model => model.Correo, new { @class = "form-control" })
+
+                                </div>
+
+
+
+
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    @Html.LabelFor(model => model.RFC)
+                                    @Html.TextBoxFor(model => model.RFC, new { @class = "form-control" })
+
+                                </div>
+
+                                <div class="col-md-4">
+                                    @Html.LabelFor(model => model.NSS)
+                                    @Html.TextBoxFor(model => model.NSS, new { @class = "form-control" })
+
+                                </div>
+                                <div class="col-md-4">
+                                    @Html.LabelFor(model => model.CURP)
+                                    @Html.TextBoxFor(model => model.CURP, new { @class = "form-control" })
+
+                                </div>
+
+
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    @Html.LabelFor(model => model.FechaNacimiento)
+                                    @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control", id = "TxtFechaNacimiento" })
+
+
+                                </div>
+                                <div class="col-md-4">
+                                    @Html.LabelFor(model => model.FechaIngreso)
+                                    @Html.TextBoxFor(model => model.FechaIngreso, new { @class = "form-control", id = "TxtFechaIngreso" })
+
+
+                                </div>
+                                <div class="col-md-4">
+
+                                    @* @Html.LabelFor(model => model.Rol.Roles, "Rol")
+                                    @Html.DropDownListFor(model => model.Rol.IdRol, new SelectList(Model.Rol.Roles, "IdRol", "Nombre"), "Selecciona tu Rol", new { @class = "form-select" }) *@
+                                    @Html.LabelFor(model => model.Departamento.IdDepartamento, "Departamento")
+                                    @Html.DropDownListFor(model => model.Departamento.IdDepartamento, new SelectList(Model.Departamento.Departamentos, "IdDepartamento", "Descripcion"), "Selecciona tu Departamento", new { @class = "form-select" })
+
+
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    @Html.LabelFor(model => model.SalarioBase)
+                                    @Html.TextBoxFor(model => model.SalarioBase, new { @class = "form-control" })
+
+
+                                </div>
+
+                                <div class="col-md-4">
+                                    @Html.LabelFor(model => model.NoFaltas)
+                                    @Html.TextBoxFor(model => model.NoFaltas, new { @class = "form-control" })
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="col-md-12 mb-4 m-lg-1 text-center form-control-plaintext offset-3 ">
+
+                                            @* <img src="data:image/png;base64,@Convert.ToBase64String(usuarioImagen.Imagen)" width="100" height="100" /> *@
+                                            <input type="file" multiple name="imgEmpleadoInput" class="form-control mt-2" onchange="CargarImagen(event)" />
+
+
+                                        </div>
+                                        <div class="col-md-12 mb-4 text-center ">
+
+                                            @if (Model.Imagen != null)
+                                            {
+                                                <img src="data:image/png;base64,@Convert.ToBase64String(Model.Imagen)" id="imgEmpleado" width="150px" height="150px" />
+                                            }
+                                            else
+                                            {
+                                                <img src="~/img/úser.png" id="imgEmpleado" width="150px" height="150px" />
+
+                                            }
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                            @if (Model.IdEmpleado > 0)
+                            {
+                                <div class="col-md-6 mt-2">
+                                    <button type="submit" class="btn btn-primary mx-2">ACTUALIZAR</button>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-6 mt-2">
+                                    <button type="submit" class="btn btn-success mx-2">GUARDAR</button>
+                                </div>
+                            }
+
+
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+
+            </div>
+        }
+
+    </div>
+</div>
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery/dist/jquery-ui.js"></script>
+
+
+<script>
+
+      
+
+    DatePicker();
+           function DatePicker() {
+    
+        $("#TxtFechaNacimiento, #TxtFechaIngreso").datepicker({
+             dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '1930:2025'
+
+        });
+    }
+</script>
+
+<script>
+        function CargarImagen(event) {
+        var output = document.getElementById('imgEmpleado');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function () {
+            url.revokeobjecturl(output.src);
+        }
+    }
+
+
+</script>
